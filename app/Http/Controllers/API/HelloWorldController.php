@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Helpers\ApiFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\HelloWorld;
 
 class HelloWorldController extends Controller
 {
@@ -13,10 +14,20 @@ class HelloWorldController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function tampil()
     {
         $message = 'Hello World';
-        return ApiFormatter::createApi(200, 'Success', $message);
+        return ApiFormatter::createApi(200, 'success', $message);
+    }
+
+    public function tampilDataHelloWorld()
+    {
+        $data = HelloWorld::all();
+        if ($data) {
+            return ApiFormatter::createApi(200, 'success', $data);
+        } else {
+            return ApiFormatter::createApi(400, 'failed');
+        }
     }
 
     /**

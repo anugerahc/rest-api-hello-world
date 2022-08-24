@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('hello', [HelloWorldController::class, 'index']);
+Route::get('tampil', [HelloWorldController::class, 'tampil']);
+Route::get('tampilDataHelloWorld', [HelloWorldController::class, 'tampilDataHelloWorld']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
