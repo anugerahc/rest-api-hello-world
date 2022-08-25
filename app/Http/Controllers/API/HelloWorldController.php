@@ -49,17 +49,21 @@ class HelloWorldController extends Controller
      */
     public function tambahDataHelloWorld(Request $request)
     {
-        $data = $request->validate([
-            'content' => 'required',
-        ]);
+        try {
+            $data = $request->validate([
+                'content' => 'required',
+            ]);
 
-        $HelloWorld = HelloWorld::create($data);
+            $HelloWorld = HelloWorld::create($data);
 
-        $showHelloWorldData = HelloWorld::where('id', '=', $HelloWorld->id)->get();
+            $showHelloWorldData = HelloWorld::where('id', '=', $HelloWorld->id)->get();
 
-        if ($HelloWorld !== null) {
-            return ApiFormatter::createApi(200, 'success', $showHelloWorldData);
-        } else {
+            if ($HelloWorld !== null) {
+                return ApiFormatter::createApi(200, 'success', $showHelloWorldData);
+            } else {
+                return ApiFormatter::createApi(400, 'error', 'data tidak terinput');
+            }
+        } catch (Exception $error) {
             return ApiFormatter::createApi(400, 'error', 'data tidak terinput');
         }
     }
