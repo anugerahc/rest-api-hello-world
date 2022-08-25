@@ -13,6 +13,4 @@ class HelloWorld extends Model
     protected $fillable = [
         'content',
     ];
-
-    protected $hidden = [];
 }

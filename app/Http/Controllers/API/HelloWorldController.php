@@ -6,6 +6,7 @@ use App\Helpers\ApiFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\HelloWorld;
+use Exception;
 
 class HelloWorldController extends Controller
 {
@@ -26,7 +27,7 @@ class HelloWorldController extends Controller
         if ($data) {
             return ApiFormatter::createApi(200, 'success', $data);
         } else {
-            return ApiFormatter::createApi(400, 'failed');
+            return ApiFormatter::createApi(400, 'error', 'data tidak ada');
         }
     }
 
@@ -46,9 +47,21 @@ class HelloWorldController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function tambahDataHelloWorld(Request $request)
     {
-        //
+        $data = $request->validate([
+            'content' => 'required',
+        ]);
+
+        $HelloWorld = HelloWorld::create($data);
+
+        $showHelloWorldData = HelloWorld::where('id', '=', $HelloWorld->id)->get();
+
+        if ($HelloWorld !== null) {
+            return ApiFormatter::createApi(200, 'success', $showHelloWorldData);
+        } else {
+            return ApiFormatter::createApi(400, 'error', 'data tidak terinput');
+        }
     }
 
     /**

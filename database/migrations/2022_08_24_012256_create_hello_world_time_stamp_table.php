@@ -18,10 +18,6 @@ return new class extends Migration
             $table->string('content');
             $table->timestamps();
         });
-
-        Schema::table('hello_world_time_stamp', function (Blueprint $table) {
-            $table->dropColumn(['updated_at']);
-        });
     }
 
     /**
