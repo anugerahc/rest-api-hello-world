@@ -14,10 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('hello_world_time_stamp', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('content');
-            $table->softDeletes();
             $table->timestamps();
+        });
+
+        Schema::table('hello_world_time_stamp', function (Blueprint $table) {
+            $table->dropColumn(['updated_at']);
         });
     }
 
@@ -28,6 +31,5 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hello_world_time_stamp');
     }
 };

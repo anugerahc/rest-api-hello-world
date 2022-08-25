@@ -5,17 +5,20 @@ namespace App\Helpers;
 class ApiFormatter
 {
     protected static $response = [
-        'code' => null,
+
+        'status' => null,
         'message' => null,
-        'data' => null,
+        'content' => [
+            'data' => null
+        ],
     ];
 
     public static function createApi($code = null, $message = null, $data = null)
     {
-        self::$response['code'] = $code;
+        self::$response['status'] = $code;
         self::$response['message'] = $message;
-        self::$response['data'] = $data;
+        self::$response['content']['data'] = $data;
 
-        return response()->json(self::$response, self::$response['code']);
+        return response()->json(self::$response, self::$response['status']);
     }
 }
