@@ -6,19 +6,19 @@ class ApiFormatter
 {
     protected static $response = [
 
+        'code' => null,
         'status' => null,
-        'message' => null,
         'content' => [
             'data' => null
         ],
     ];
 
-    public static function createApi($code = null, $message = null, $data = null)
+    public static function createApi($code = null, $status = null, $data = null)
     {
-        self::$response['status'] = $code;
-        self::$response['message'] = $message;
+        self::$response['code'] = $code;
+        self::$response['status'] = $status;
         self::$response['content']['data'] = $data;
 
-        return response()->json(self::$response, self::$response['status']);
+        return response()->json(self::$response, self::$response['code']);
     }
 }
