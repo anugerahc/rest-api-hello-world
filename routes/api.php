@@ -21,4 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('hello-world/tampil', [HelloWorldController::class, 'tampil']);
 Route::get('hello-world/tampilDataHelloWorld', [HelloWorldController::class, 'tampilDataHelloWorld']);
-Route::post('hello-world/store', [HelloWorldController::class, 'tambahDataHelloWorld']);
+Route::post('hello-world/tambahDataHelloWorld', [HelloWorldController::class, 'tambahDataHelloWorld']);
