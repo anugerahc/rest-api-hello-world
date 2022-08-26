@@ -29,6 +29,8 @@ class HelloWorldController extends Controller
         } else {
             return ApiFormatter::createApi(400, 'error', 'data tidak ada');
         }
+
+        echo "<p>$data</p>";
     }
 
     /**
@@ -59,7 +61,7 @@ class HelloWorldController extends Controller
             $showHelloWorldData = HelloWorld::where('id', '=', $HelloWorld->id)->get();
 
             if ($HelloWorld !== null) {
-                return ApiFormatter::createApi(200, 'success', $showHelloWorldData);
+                return ApiFormatter::createApi(200, 'success', 'data berhasil diinput');
             } else {
                 return ApiFormatter::createApi(400, 'error', 'data tidak terinput');
             }
