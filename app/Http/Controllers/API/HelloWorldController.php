@@ -58,15 +58,13 @@ class HelloWorldController extends Controller
 
             $HelloWorld = HelloWorld::create($data);
 
-            $showHelloWorldData = HelloWorld::where('id', '=', $HelloWorld->id)->get();
-
             if ($HelloWorld !== null) {
                 return ApiFormatter::createApi(200, 'success', 'data berhasil diinput');
             } else {
                 return ApiFormatter::createApi(400, 'error', 'data tidak terinput');
             }
         } catch (Exception $error) {
-            return ApiFormatter::createApi(400, 'error', 'data tidak terinput');
+            return ApiFormatter::createApi(400, 'error', 'Bad Request');
         }
     }
 
