@@ -13,11 +13,17 @@ class ApiFormatter
         ],
     ];
 
-    public static function createApi($code = null, $status = null, $data = null)
+    public static function createApi($code = null, $message = null)
     {
-        self::$response['code'] = $code;
-        self::$response['status'] = $status;
-        self::$response['content']['data'] = $data;
+        if ($code == 200) {
+            self::$response['code'] = $code;
+            self::$response['status'] = 'success';
+            self::$response['content']['data'] = $message;
+        } else {
+            self::$response['code'] = $code;
+            self::$response['status'] = 'error';
+            self::$response['content']['data'] = $message;
+        }
 
         return response()->json(self::$response, self::$response['code']);
     }

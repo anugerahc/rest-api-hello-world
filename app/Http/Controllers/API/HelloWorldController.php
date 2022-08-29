@@ -18,7 +18,7 @@ class HelloWorldController extends Controller
     public function tampil()
     {
         $message = 'Hello World';
-        return ApiFormatter::createApi(200, 'success', $message);
+        return ApiFormatter::createApi(200, $message);
     }
 
     public function tampilDataHelloWorld()
@@ -51,10 +51,10 @@ class HelloWorldController extends Controller
             if ($HelloWorld !== null) {
                 return ApiFormatter::createApi(200, 'success', 'data berhasil diinput');
             } else {
-                return ApiFormatter::createApi(400, 'error', 'data tidak terinput');
+                return ApiFormatter::createApi(400, 'data tidak terinput');
             }
         } catch (Exception $error) {
-            return ApiFormatter::createApi(400, 'error', 'Bad Request');
+            return ApiFormatter::createApi(400, 'data tidak benar');
         }
     }
 
