@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\HelloWorld;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class HelloWorldController extends Controller
 {
@@ -23,14 +24,24 @@ class HelloWorldController extends Controller
 
     public function tampilDataHelloWorld()
     {
+
+        //trying pagination
+        $data = DB::table('hello_world_time_stamp')->paginate(5);
+
+        return ApiFormatter::createApi(200, $data);
+
+        /* 
+        ###
+        Old Showing Data from Database
+        ###
+        
         $data = HelloWorld::all();
         if ($data) {
             return ApiFormatter::createApi(200, 'success', $data);
         } else {
             return ApiFormatter::createApi(400, 'error', 'data tidak ada');
         }
-
-        echo "<p>$data</p>";
+        */
     }
 
     /**
@@ -49,7 +60,7 @@ class HelloWorldController extends Controller
             $HelloWorld = HelloWorld::create($data);
 
             if ($HelloWorld !== null) {
-                return ApiFormatter::createApi(200, 'success', 'data berhasil diinput');
+                return ApiFormatter::createApi(200, 'data berhasil diinput');
             } else {
                 return ApiFormatter::createApi(400, 'data tidak terinput');
             }
