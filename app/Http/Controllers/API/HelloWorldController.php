@@ -22,9 +22,9 @@ class HelloWorldController extends Controller
         return ApiFormatter::createApi(200, $message);
     }
 
-    public function tampilDataHelloWorld()
+    public function tampilDataHelloWorld(Request $request)
     {
-
+        //$reqPaginate = $request->input('pagination');
         //trying pagination
         $data = DB::table('hello_world_time_stamp')->paginate(5);
 
